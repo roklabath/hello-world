@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Angular Js</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<style>
+		input.ng-invalid{ 
+			background-color: lightblue;
+		}/* ถ้า input ว่างจะมี background สี lightblue ต้องมี attr "required" ภายใน tag ด้วย */
+	</style>
+</head>
+
+<body>
+	<div ng-app="myApp" ng-init="name='EARTH';num1=2;num2=3" ng-controller="myCtrl">
+		<p>The name is <span ng-bind="name"></span></p>
+		<p ng-bind="num1 + num2"></p>
+		<p>Full Name: {{firstName + " " + lastName}}</p>
+		<p>Full Name: {{fullName()}}</p>
+		<p>Name: <input type="text" ng-model="name"></p>
+		<p>Style: <input type="text" ng-model="style" required></p>
+
+
+		<form ng-app="" name="myForm" ng-init="myText='post@myweb.com'">
+			Email:
+			<input type="email" name="myAddress" ng-model="myText" required>
+			<p>Edit the e-mail address, and try to change the status.</p>
+			<h1>Status</h1>
+			<p>Valid: {{myForm.myAddress.$valid}} (if true, the value meets all criteria).</p>
+			<p>Dirty: {{myForm.myAddress.$dirty}} (if true, the value has been changed).</p>
+			<p>Touched: {{myForm.myAddress.$touched}} (if true, the field has been in focus).</p>
+		</form>
+
+
+		<ul>
+			<li ng-repeat="x in names | orderBy:'country'">
+				{{ x.name + ', ' + x.country }}
+			</li>
+		</ul>
+
+
+
+
+	</div>
+</body>
+</html>
+
+
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('myCtrl', function($scope) {
+		$scope.firstName = "Koravit";
+		$scope.lastName = "Sawekvannekorn";
+		$scope.fullName = function(){
+				return $scope.firstName + " " + $scope.lastName;
+			};
+
+		$scope.names = [
+			{name:'Jani',country:'Norway'},
+			{name:'Carl',country:'Sweden'},
+			{name:'Margareth',country:'England'},
+			{name:'Hege',country:'Norway'},
+			{name:'Joe',country:'Denmark'},
+			{name:'Gustav',country:'Sweden'},
+			{name:'Birgit',country:'Denmark'},
+			{name:'Mary',country:'England'},
+			{name:'Kai',country:'Norway'}
+			];
+	});
+</script>
+<!--
+	AngularJS modules define AngularJS applications.
+	AngularJS controllers control AngularJS applications.
+	The ng-app directive defines the application, the ng-controller directive defines the controller.
+
+	An AngularJS module defines an application.
+	The module is a container for the different parts of an application.
+	The module is a container for the application controllers.
+	Controllers always belong to a module.
+-->
+
+
+
+
+<!--
+SERVICES
+$location
+$http
+$timeout
+$interval
+-->
+<!--
+$http method
+.delete()
+.get()
+.head()
+.jsonp()
+.patch()
+.post()
+.put()
+-->
+
+
+
+
+<!--
+AngularJS directives are HTML attributes with an 'ng' prefix.
+You can use data-ng-, instead of ng-, if you want to make your page HTML valid.
+
+
+
+
+The "ng-app" directive defines an AngularJS application. => บอก AngularJS ว่าภายใน div หรือ element ที่กำหนดนี้มี AngularJS ควบคุมอยู่
+The "ng-init" directive initializes AngularJS application variables.But,not very common. =>กำหนดค่าเริ่มต้นของตัวแปรของ AngularJS กำหนดที่เดียวกับ "ng-app" แต่ใช้ได้แค่ที่ดียวไม่หลากหลาย
+ng-init="person={firstName:'John',lastName:'Doe'}" => Object
+ng-init="points=[1,15,19,2,40]" => Array
+
+The "ng-model" directive binds the value of HTML controls (input, select, textarea) to application data.
+If the property in the ng-model attribute does not exist, AngularJS will create one for you.
+The "ng-bind" directive binds application data to the HTML view.
+<p ng-bind="name"></p> SAME <p>{{ name }}</p>
+
+-->
